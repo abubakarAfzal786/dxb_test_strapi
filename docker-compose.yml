@@ -1,0 +1,21 @@
+version: '3'
+services:
+  nodejs:
+    container_name: nodejs
+    image: node:14-alpine
+    ports: 
+     - 1432:1337
+    volumes: 
+     - ./:/opt/app
+    working_dir: /opt/app
+    command: sh ./node.sh
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: strapi
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: strapi
+    volumes:
+      - ../local-strap-data:/var/lib/postgresql/data
+    ports: 
+      - 5431:5432
